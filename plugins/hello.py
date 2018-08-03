@@ -7,6 +7,9 @@ from rtmbot.core import Plugin, Job
 patterns = {
     r'(파이[썬선손쏜]|[Pp]ython)': [
         '파이썬요? 사랑입니다.',
+    ],
+    r'주사위': [
+        lambda m: '주사위를 던졌습니다 => ' + str(random.randint(1, 6)),
     ]
 }
 
@@ -42,10 +45,11 @@ class HelloPlugin(Plugin):
     def process_message(self, data):
         for p, replies in patterns.items():
             if re.match(p, data['text']):
-                self.outputs.append([
-                    data['channel'],
-                    random.choice(replies)
-                ])
+                reply = random.choice(replies)
+                if type(reply) == str:
+                    self.outputs.append([data['channel'], reply])
+                else:
+                    self.outputs.append([data['channel'], reply(data['text'])])
                 return
 
         if "<@UC3L7FQ7Q>" in data['text']:
