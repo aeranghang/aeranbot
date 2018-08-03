@@ -1,0 +1,10 @@
+# IDEs
+.idea
+*.iml
+
+# Python
+.venv/
+
+# Project
+rtmbot.conf
+rtmbot.log
