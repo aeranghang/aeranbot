@@ -10,7 +10,10 @@ patterns = {
     ],
     r'주사위': [
         lambda m: '주사위를 던졌습니다 => ' + str(random.randint(1, 6)),
-    ]
+    ],
+    r'동전': [
+        lambda m: '동전을 던졌습니다 => ' + random.choice(['앞면', '뒷면']),
+    ],
 }
 
 
