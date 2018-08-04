@@ -40,6 +40,8 @@ def test_open_ended_questions():
     assert actual == expected
     actual = {r('이유가 뭐지?', generals) for _ in range(100)}
     assert actual == expected
+    actual = {r('맥 살까?', generals) for _ in range(100)}
+    assert actual == expected
 
 
 def test_ask_for_name():

@@ -17,10 +17,8 @@ class HelloPlugin(Plugin):
         pass
 
     def process_message(self, data):
-        if "<@UC3L7FQ7Q>" in data['text']:
+        reply = reply_to_pattern(data['text'], generals)
+        if reply is None and "<@UC3L7FQ7Q>" in data['text']:
             reply = reply_to_pattern(data['text'], mentions)
-        else:
-            reply = reply_to_pattern(data['text'], generals)
-
         if reply:
             self.outputs.append([data['channel'], reply])
