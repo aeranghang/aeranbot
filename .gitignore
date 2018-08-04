@@ -3,6 +3,7 @@
 *.iml
 
 # Python
+.pytest_cache/
 .venv/
 
 # Project
