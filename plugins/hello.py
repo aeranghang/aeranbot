@@ -1,8 +1,6 @@
-import random
-
 from rtmbot.core import Plugin, Job
 
-from canned_reply import reply_to_pattern, random_texts
+from canned_reply import reply_to_pattern, mentions, generals
 
 
 class InitiateChatJob(Job):
@@ -19,14 +17,10 @@ class HelloPlugin(Plugin):
         pass
 
     def process_message(self, data):
-        reply = reply_to_pattern(data['text'])
+        if "<@UC3L7FQ7Q>" in data['text']:
+            reply = reply_to_pattern(data['text'], mentions)
+        else:
+            reply = reply_to_pattern(data['text'], generals)
+
         if reply:
             self.outputs.append([data['channel'], reply])
-            return
-        elif "<@UC3L7FQ7Q>" in data['text']:
-            self.outputs.append([
-                data['channel'],
-                random.choice(random_texts)
-            ])
-        else:
-            pass
