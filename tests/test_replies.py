@@ -31,3 +31,12 @@ def test_choice():
     assert actual == expected
     actual = {r('아이언맨, 슈퍼맨?') for _ in range(100)}
     assert actual == expected
+
+
+def test_open_ended_questions():
+    expected = {'글쎄...', '다른 분들은 어떻게 생각하세요?', '난 모르겠어.', '좀 더 고민해봐.'}
+
+    actual = {r('이유가 무엇일까요?') for _ in range(100)}
+    assert actual == expected
+    actual = {r('이유가 뭐지?') for _ in range(100)}
+    assert actual == expected
