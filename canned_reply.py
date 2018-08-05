@@ -1,5 +1,11 @@
 import random
 import re
+from urllib.parse import quote
+
+import requests
+import yaml
+
+conf = yaml.load(open("rtmbot.conf", "r"))
 
 
 generals = {
@@ -27,6 +33,9 @@ generals = {
 
 
 mentions = {
+    r'.*주소검색\s?\:(.+)$': [
+        lambda g: search_naver(g[0].strip())
+    ],
     r'.*이름이\s+(뭐|모|뭔)(야|니|냐|에요|예요|가|가요)?\?$': [
         '내 이름은 애란봇이야. 사실은 시리보다 똑똑하지.',
         '애란봇입니다 :)',
@@ -69,3 +78,20 @@ def reply_to_pattern(text, pattern_map):
             else:
                 return reply(m.groups())
     return None
+
+
+def search_naver(keyword):
+    encoded_keyword = quote(keyword.encode('utf-8'))
+    url = f"https://openapi.naver.com/v1/search/local?query={encoded_keyword}"
+    headers = {
+        "X-Naver-Client-Id": conf["NAVER_API_ID"],
+        "X-Naver-Client-Secret": conf["NAVER_API_SECRET"],
+    }
+    res = requests.request("GET", url, headers=headers).json()['items']
+    if len(res) == 0:
+        return f'"{keyword}"로 검색한 결과가 없습니다.'
+    else:
+        return '\n'.join(
+            f"- {re.sub(r'<.+?>', '', r['title'])}: {r['roadAddress']}"
+            for r in res
+        )

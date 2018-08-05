@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 rtmbot = "*"
 pytest = "*"
+requests = "*"
 
 [dev-packages]
 
