@@ -82,16 +82,16 @@ def reply_to_pattern(text, pattern_map):
 
 def search_naver(keyword):
     encoded_keyword = quote(keyword.encode('utf-8'))
-    url = f"https://openapi.naver.com/v1/search/local?query={encoded_keyword}"
+    url = "https://openapi.naver.com/v1/search/local?query=%s" % encoded_keyword
     headers = {
         "X-Naver-Client-Id": conf["NAVER_API_ID"],
         "X-Naver-Client-Secret": conf["NAVER_API_SECRET"],
     }
     res = requests.request("GET", url, headers=headers).json()['items']
     if len(res) == 0:
-        return f'"{keyword}"로 검색한 결과가 없습니다.'
+        return '"%s" 키워드로 검색한 결과가 없습니다.' % keyword
     else:
         return '\n'.join(
-            f"- {re.sub(r'<.+?>', '', r['title'])}: {r['roadAddress']}"
+            "- %s: %s" % (re.sub(r'<.+?>', '', r['title']), r['roadAddress'])
             for r in res
         )
