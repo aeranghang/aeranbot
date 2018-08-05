@@ -3,10 +3,8 @@ import re
 from urllib.parse import quote
 
 import requests
-import yaml
 
-conf = yaml.load(open("rtmbot.conf", "r"))
-
+import secret
 
 generals = {
     r'.*\b주사위.*': [
@@ -84,8 +82,8 @@ def search_naver(keyword):
     encoded_keyword = quote(keyword.encode('utf-8'))
     url = "https://openapi.naver.com/v1/search/local?query=%s" % encoded_keyword
     headers = {
-        "X-Naver-Client-Id": conf["NAVER_API_ID"],
-        "X-Naver-Client-Secret": conf["NAVER_API_SECRET"],
+        "X-Naver-Client-Id": secret.NAVER_API_ID,
+        "X-Naver-Client-Secret": secret.NAVER_API_SECRET,
     }
     res = requests.request("GET", url, headers=headers).json()['items']
     if len(res) == 0:

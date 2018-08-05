@@ -7,5 +7,5 @@
 .venv/
 
 # Project
-rtmbot.conf
+secret.py
 rtmbot.log

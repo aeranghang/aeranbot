@@ -8,7 +8,7 @@ Slack RTM API를 이용한 간단한 슬랙봇.
 
 설정:
 
-*   `rtmbot.conf.sample`을 복사하여 `rtmbot.conf` 파일을 만들고 슬랙에서 발급받은 토큰을 입력한다.
+*   `secret.py.sample`을 복사하여 `secret.py` 파일을 만들고 슬랙에서 발급받은 토큰을 입력한다.
 
 봇 실행하기 (맥):
 

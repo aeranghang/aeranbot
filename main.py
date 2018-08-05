@@ -1,6 +1,7 @@
+from rtmbot import RtmBot
 from rtmbot.core import Plugin, Job
-
-from canned_reply import reply_to_pattern, mentions, generals
+import secret
+from canned_reply import reply_to_pattern, generals, mentions
 
 
 class InitiateChatJob(Job):
@@ -22,3 +23,11 @@ class HelloPlugin(Plugin):
             reply = reply_to_pattern(data['text'], mentions)
         if reply:
             self.outputs.append([data['channel'], reply])
+
+
+config = {
+    "SLACK_TOKEN": secret.SLACK_TOKEN,
+    "ACTIVE_PLUGINS": ["main.HelloPlugin"]
+}
+bot = RtmBot(config)
+bot.start()

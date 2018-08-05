@@ -1,4 +1,0 @@
-DEBUG: True
-SLACK_TOKEN: "xoxb-0000000000-0000000000-0000000000000"
-ACTIVE_PLUGINS:
-    - plugins.hello.HelloPlugin
