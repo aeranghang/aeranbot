@@ -21,7 +21,7 @@ def test_coin_toss():
 
 
 def test_choice():
-    expected = {'아이언맨', '슈퍼맨', '글쎄?', '정말 이 중에서 골라야 하나요?'}
+    expected = {'아이언맨', '슈퍼맨', '글쎄?', '모두 쬲!', '다 별로...', '정말 이 중에서 골라야 하나요?'}
 
     actual = {r('아이언맨이랑 슈퍼맨 중 누구?', generals) for _ in range(100)}
     assert actual == expected
@@ -34,7 +34,7 @@ def test_choice():
 
 
 def test_vs():
-    expected = {'아이언맨', '슈퍼맨', '둘 다 별로...'}
+    expected = {'아이언맨', '슈퍼맨', '글쎄?', '모두 쬲!', '다 별로...', '정말 이 중에서 골라야 하나요?'}
 
     actual = {r('아이언맨 vs. 슈퍼맨', generals) for _ in range(100)}
     assert actual == expected
