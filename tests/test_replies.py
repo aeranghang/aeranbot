@@ -33,6 +33,18 @@ def test_choice():
     assert actual == expected
 
 
+def test_vs():
+    expected = {'아이언맨', '슈퍼맨', '둘 다 별로...'}
+
+    actual = {r('아이언맨 vs. 슈퍼맨', generals) for _ in range(100)}
+    assert actual == expected
+    actual = {r('아이언맨 vs.슈퍼맨', generals) for _ in range(100)}
+    assert actual == expected
+    actual = {r('아이언맨 vs 슈퍼맨', generals) for _ in range(100)}
+    assert actual == expected
+
+
+
 def test_open_ended_questions():
     expected = {'글쎄...', '다른 분들은 어떻게 생각하세요?', '난 모르겠어.', '좀 더 고민해봐.'}
 
