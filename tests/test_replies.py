@@ -44,7 +44,6 @@ def test_vs():
     assert actual == expected
 
 
-
 def test_open_ended_questions():
     expected = {'글쎄...', '다른 분들은 어떻게 생각하세요?', '난 모르겠어.', '좀 더 고민해봐.'}
 
@@ -53,6 +52,8 @@ def test_open_ended_questions():
     actual = {r('이유가 뭐지?', generals) for _ in range(100)}
     assert actual == expected
     actual = {r('맥 살까?', generals) for _ in range(100)}
+    assert actual == expected
+    actual = {r('그럼 뭐가 있죠?', generals) for _ in range(100)}
     assert actual == expected
 
 
