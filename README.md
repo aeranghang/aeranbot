@@ -10,16 +10,9 @@ Slack RTM API를 이용한 간단한 슬랙봇.
 
 *   `secret.py.sample`을 복사하여 `secret.py` 파일을 만들고 슬랙에서 발급받은 토큰을 입력한다.
 
-봇 실행하기 (맥):
+봇 실행하기:
 
-    pipenv shell
-    PYTHONPATH=. rtmbot
-
-봇 실행하기 (윈도):
-
-    pipenv shell
-    SET PYTHONPATH=.
-    rtmbot
+    pipenv run python main.py
 
 참고:
 
