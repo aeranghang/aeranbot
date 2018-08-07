@@ -84,14 +84,41 @@ mentions = {
 
 
 def reply_to_pattern(text, pattern_map):
+    """
+    text에 대한 응답을 pattern_map에서 찾아서 반환한다.
+
+    pattern_map은 정규표현식 패턴이 key이고 해당 패턴에 대한 응답 후보 list가
+    value인 딕셔너리이다. 응답 후보 list에는 문자열 또는 함수가 담긴다. 간단한
+    응답은 고정된 문자열로, 주사위 던지기 등 복잡한 응답은 함수로 처리.
+
+    :param text: 사용자가 입력한 문장
+    :param pattern_map: 정규표현식이 key이고 응답 후보 list가 value인 딕셔너리
+    :return: 일치하는 응답이 있는 경우 해당 응답, 없는 경우 None
+    """
+
+    # 딕셔너리의 각 항목에 대하여...
     for pattern, replies in pattern_map.items():
+        # 1. text가 현재 pattern에 일치하는지 검사
         m = re.match(pattern, text)
-        if m:
-            reply = random.choice(replies)
-            if type(reply) == str:
-                return reply
-            else:
-                return reply(m.groups())
+
+        # 2. 일치하지 않았으면 다음 패턴으로 넘거가기
+        if m is None:
+            continue
+
+        # 3. 일치하면 해당 패턴과 연결된 응답들 중 하나를 임의로 선택
+        reply = random.choice(replies)
+
+        if type(reply) == str:
+            # 3.1. 선택된 응답이 문자열이면 해당 문자열을 반환
+            return reply
+        else:
+            # 3.2. 선택된 응답이 함수이면 함수를 호출하고 그 결과를 반환.
+            #
+            # 함수를 호출할 때 일치한 패턴에서 추출한 값들(capture groups)을
+            # 인자로 넘겨준다.
+            return reply(m.groups())
+
+    # 전체 패턴을 모두 검사하였는데 일치하는 값이 없었으면 None을 반환
     return None
 
 
